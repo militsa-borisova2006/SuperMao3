@@ -23,6 +23,9 @@ public class Mario extends Character {
 
         while(true) {
 
+//            int x = getX();
+//            x += speed;
+
             setX(getX() + speed);
 //            if((dirXRight && xCoord+125>width) || (!dirXRight && xCoord-125<0))
 //                dirXRight=!dirXRight;
@@ -30,11 +33,13 @@ public class Mario extends Character {
                 setX(0);
             }
 
-            Thread.sleep(50);
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
-        int x = getX();
-        x += speed;
 
     }
 
