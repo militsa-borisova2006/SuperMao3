@@ -19,12 +19,23 @@ public class Mario extends Character {
         g.drawImage(mario, 0, 0, getWidth(), getHeight(), null);
     }
 
-    private void moveMario(int frameWidth) {
+    public void moveMario(int frameWidth) {
+
+        while(true) {
+
+            setX(getX() + speed);
+//            if((dirXRight && xCoord+125>width) || (!dirXRight && xCoord-125<0))
+//                dirXRight=!dirXRight;
+            if (getX() > frameWidth) {
+                setX(0);
+            }
+
+            Thread.sleep(50);
+        }
+
         int x = getX();
         x += speed;
-        if (x > frameWidth) {
-            setX(0);
-        }
+
     }
 
     public int getSpeed() {
