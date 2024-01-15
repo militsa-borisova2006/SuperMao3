@@ -16,8 +16,6 @@ public class Character extends JPanel {
         this.x = x;
         this.y = y;
     }
-
-    @Override
     public int getHeight() {
         return height;
     }
@@ -26,7 +24,6 @@ public class Character extends JPanel {
         this.height = height;
     }
 
-    @Override
     public int getWidth() {
         return width;
     }
@@ -35,7 +32,6 @@ public class Character extends JPanel {
         this.width = width;
     }
 
-    @Override
     public int getX() {
         return x;
     }
@@ -44,7 +40,6 @@ public class Character extends JPanel {
         this.x = x;
     }
 
-    @Override
     public int getY() {
         return y;
     }
