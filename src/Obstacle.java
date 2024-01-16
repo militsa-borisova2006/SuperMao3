@@ -4,11 +4,9 @@ public class Obstacle extends Character {
     private Image obstacle;
 
     @Override
-    protected void paintComponent(Graphics g)
-    {
+    protected void paintComponent(Graphics g)  {
         super.paintComponent(g);
-
-        g.drawImage(obstacle, 0, 0, getWidth(), getHeight(), null); // image full size
+        g.drawImage(obstacle, 0, 0, getWidth(), getHeight(), null);
     }
 
     public Image getObstacle() {

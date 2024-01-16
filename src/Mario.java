@@ -1,34 +1,34 @@
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Mario extends Character {
     private int speed;
-    private Image mario;
+    private boolean jumped;
+    private Image marioRun;
+    private Image marioJump;
 
     public Mario(int height, int width, int x, int y, int speed) {
         super(height, width, x, y);
         this.speed = speed;
+        this.addKeyListener(new KeyInput());
     }
 
     public Mario(int speed) {
+        this.addKeyListener(new KeyInput());
     }
 
     @Override
     protected void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        g.drawImage(mario, 0, 0, getWidth(), getHeight(), null);
+        if (jumped)  g.drawImage(marioJump, 0, 0, getWidth(), getHeight(), null);
+        else g.drawImage(marioRun, 0, 0, getWidth(), getHeight(), null);
     }
 
     public void moveMario(int frameWidth) {
-
         while(true) {
-
-//            int x = getX();
-//            x += speed;
-
             setX(getX() + speed);
-//            if((dirXRight && xCoord+125>width) || (!dirXRight && xCoord-125<0))
-//                dirXRight=!dirXRight;
             if (getX() > frameWidth) {
                 setX(0);
             }
@@ -39,8 +39,29 @@ public class Mario extends Character {
                 e.printStackTrace();
             }
         }
+    }
 
+    private class KeyInput extends KeyAdapter {
+        public KeyInput () {
+        }
 
+        @Override
+        public void keyPressed(KeyEvent e) {
+            int key = e.getKeyCode();
+            if (key == KeyEvent.VK_ENTER && !jumped) {
+                setY(getY() - 15);
+                setJumped(true);
+            }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            int key = e.getKeyCode();
+            if (key == KeyEvent.VK_ENTER && jumped) {
+                setY(getY() + 15);
+                setJumped(false);
+            }
+        }
     }
 
     public int getSpeed() {
@@ -51,11 +72,27 @@ public class Mario extends Character {
         this.speed = speed;
     }
 
-    public Image getMario() {
-        return mario;
+    public Image getMarioRun() {
+        return marioRun;
     }
 
-    public void setMario(Image mario) {
-        this.mario = mario;
+    public void setMarioRun(Image marioRun) {
+        this.marioRun = marioRun;
+    }
+
+    public Image getMarioJump() {
+        return marioJump;
+    }
+
+    public void setMarioJump(Image marioJump) {
+        this.marioJump = marioJump;
+    }
+
+    public boolean hasJumped() {
+        return jumped;
+    }
+
+    public void setJumped(boolean hasJumped) {
+        this.jumped = hasJumped;
     }
 }
