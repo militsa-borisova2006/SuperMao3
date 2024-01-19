@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class Mario extends Character {
+public class  Mario extends Character {
     private int speed;
     private boolean jumped;
     private Image marioRun;
@@ -11,11 +11,26 @@ public class Mario extends Character {
     public Mario(int height, int width, int x, int y, int speed) {
         super(height, width, x, y);
         this.speed = speed;
-        this.addKeyListener(new KeyInput());
     }
 
     public Mario(int speed) {
-        this.addKeyListener(new KeyInput());
+            }
+
+
+    public void keyPressed(KeyEvent e) {
+        int key = e.getKeyCode();
+        if (key == KeyEvent.VK_ENTER && !jumped) {
+            setY(getY() - 15);
+            setJumped(true);
+        }
+    }
+
+    public void keyReleased(KeyEvent e) {
+        int key = e.getKeyCode();
+        if (key == KeyEvent.VK_ENTER && jumped) {
+            setY(getY() + 15);
+            setJumped(false);
+        }
     }
 
     @Override
@@ -27,42 +42,25 @@ public class Mario extends Character {
     }
 
     public void moveMario(int frameWidth) {
-        while(true) {
+//        while(true) {
             setX(getX() + speed);
             if (getX() > frameWidth) {
                 setX(0);
             }
 
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+//            try {
+//                Thread.sleep(50);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
-
-    private class KeyInput extends KeyAdapter {
-        public KeyInput () {
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-            int key = e.getKeyCode();
-            if (key == KeyEvent.VK_ENTER && !jumped) {
-                setY(getY() - 15);
-                setJumped(true);
-            }
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-            int key = e.getKeyCode();
-            if (key == KeyEvent.VK_ENTER && jumped) {
-                setY(getY() + 15);
-                setJumped(false);
-            }
-        }
-    }
+//
+//    private class KeyInput extends KeyAdapter {
+//        public KeyInput () {
+//        }
+//
+//    }
 
     public int getSpeed() {
         return speed;

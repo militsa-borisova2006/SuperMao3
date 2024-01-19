@@ -1,9 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class MarioGame extends JFrame {
+public class MarioGame extends JFrame implements KeyListener {
     private static final int FRAME_WIDTH = 1200;
     private static final int FRAME_HEIGHT = 730;
 
@@ -37,6 +40,7 @@ public class MarioGame extends JFrame {
         obstacles = new Obstacle[3];
         Image obstacleImage = new ImageIcon(absolutePath + "/obstacle.png").getImage();
         for (int i = 0; i < 3; i++) {
+            obstacles[i] = new Obstacle();
             obstacles[i].setObstacle(obstacleImage);
             obstacles[i].setHeight(100);
             obstacles[i].setWidth(100);
@@ -45,16 +49,36 @@ public class MarioGame extends JFrame {
             bgpanel.add(obstacles[i]);
         }
         bgpanel.add(mario);
+        bgpanel.addKeyListener(this);
         getContentPane().add(bgpanel);
+        this.addKeyListener(this);
+    }
+
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        mario.keyPressed(e);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        mario.keyReleased(e);
     }
 
     public void start() {
         mario.moveMario(FRAME_WIDTH);
     }
 
-//    public static void main(String[] args) {
-//        MarioGame game = new MarioGame();
-//        game.start();
-//        game.setVisible(true);
-//    }
+    public static void main(String[] args) {
+        MarioGame game = new MarioGame();
+        game.setVisible(true);
+        game.start();
+    }
+
+
 }
