@@ -19,17 +19,21 @@ public class  Mario extends Character {
 
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
-        if (key == KeyEvent.VK_ENTER && !jumped) {
-            setY(getY() - 15);
+        if (key == KeyEvent.VK_SPACE && !jumped) {
+            int y = getY() - 15;
+            setY(y);
             setJumped(true);
+            repaint();
         }
     }
 
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
-        if (key == KeyEvent.VK_ENTER && jumped) {
-            setY(getY() + 15);
+        if (key == KeyEvent.VK_SPACE && jumped) {
+            int y = getY() + 15;
+            setY(y);
             setJumped(false);
+            repaint();
         }
     }
 
@@ -37,23 +41,27 @@ public class  Mario extends Character {
     protected void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        if (jumped)  g.drawImage(marioJump, 0, 0, getWidth(), getHeight(), null);
-        else g.drawImage(marioRun, 0, 0, getWidth(), getHeight(), null);
+        if (jumped)
+            g.drawImage(marioJump, getX(), getY(), getWidth(), getHeight(), this);
+        else
+            g.drawImage(marioRun, getX(), getY(), getWidth(), getHeight(), this);
     }
 
     public void moveMario(int frameWidth) {
-//        while(true) {
-            setX(getX() + speed);
+        while(true) {
+            int x = getX() + speed;
+            setX(x);
             if (getX() > frameWidth) {
                 setX(0);
             }
+            repaint();
 
-//            try {
-//                Thread.sleep(50);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 //
 //    private class KeyInput extends KeyAdapter {

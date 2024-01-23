@@ -25,7 +25,8 @@ public class MarioGame extends JFrame implements KeyListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Image imgIcon = new ImageIcon(absolutePath + "/SuperMario_background.png").getImage();
-        JPanelWithBackground bgpanel = new JPanelWithBackground(imgIcon);
+//        JPanelWithBackground bgpanel = new JPanelWithBackground(imgIcon);
+        JPanel bgpanel = new JPanel();
         bgpanel.setBounds(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
 
         Image marioRunImage = new ImageIcon(absolutePath + "/mario_running.png").getImage();
@@ -36,22 +37,25 @@ public class MarioGame extends JFrame implements KeyListener {
         mario.setHeight(100);
         mario.setWidth(100);
         mario.setX(150);
-        mario.setY(FRAME_HEIGHT - mario.getHeight() - 130);
-        obstacles = new Obstacle[3];
-        Image obstacleImage = new ImageIcon(absolutePath + "/obstacle.png").getImage();
-        for (int i = 0; i < 3; i++) {
-            obstacles[i] = new Obstacle();
-            obstacles[i].setObstacle(obstacleImage);
-            obstacles[i].setHeight(100);
-            obstacles[i].setWidth(100);
-            obstacles[i].setX(400 + i * 200);
-            obstacles[i].setY(FRAME_HEIGHT - obstacles[i].getHeight() - 230);
-            bgpanel.add(obstacles[i]);
-        }
-        bgpanel.add(mario);
-        bgpanel.addKeyListener(this);
-        getContentPane().add(bgpanel);
+        int y = FRAME_HEIGHT - mario.getHeight() - 130;
+        mario.setY(y);
+//        obstacles = new Obstacle[3];
+//        Image obstacleImage = new ImageIcon(absolutePath + "/obstacle.png").getImage();
+//        for (int i = 0; i < 3; i++) {
+//            obstacles[i] = new Obstacle();
+//            obstacles[i].setObstacle(obstacleImage);
+//            obstacles[i].setHeight(100);
+//            obstacles[i].setWidth(100);
+//            obstacles[i].setX(400 + i * 200);
+//            obstacles[i].setY(FRAME_HEIGHT - obstacles[i].getHeight() - 230);
+//            bgpanel.add(obstacles[i]);
+//        }
+        add(mario);
+       addKeyListener(this);
+//        getContentPane().add(bgpanel);
+
         this.addKeyListener(this);
+
     }
 
 
